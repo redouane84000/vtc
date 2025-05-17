@@ -1,9 +1,11 @@
 const express = require('express');
 const app = express();
-const port = 3000;
+const port = process.env.PORT;      
 const cors = require('cors');
 const vtcRoutes = require('./routes/route');
+const dotenv = require('dotenv');
 
+dotenv.config();
 
 
 app.use(cors());
@@ -14,6 +16,11 @@ app.use((req, res, next) => {
     
     next();
  });
+
+
+app.get('/', (req, res) => {
+    res.send('Hello World test de connexion');
+});
 
 app.use('/vtc', vtcRoutes);
 
